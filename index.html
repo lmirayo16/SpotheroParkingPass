@@ -4,35 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure SpotHero Pass</title>
-    <style>
-        /* Make iframe cover full screen */
-        iframe {
-            width: 100%;
-            height: 100vh;
-            border: none;
+    <script>
+        function openPass() {
+            let newWindow = window.open("https://spothero.com/parking-pass/96363618?key=f83628ee78d4c13913f3e468a49759058c852d8420d315cfb3f7e4311b0b4748&_branch_match_id=1401690758211250180&utm_source=confirmation_email&utm_campaign=parking_pass&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXLy7IL8lILcrXSywo0MvJzMvWLzcNyshwKys1DUqyrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUAbzUFCT8AAAA%3D", "_blank");
+
+            setTimeout(() => {
+                try {
+                    let cancelButton = newWindow.document.querySelector('[data-testid="CancelReservation-button-delete"]');
+                    if (cancelButton) {
+                        cancelButton.style.display = "none"; // Hide the button
+                    }
+                } catch (error) {
+                    console.error("Could not modify the new window's content. Browser security restrictions may apply.");
+                }
+            }, 3000); // Give time for the page to load
         }
-    </style>
+    </script>
 </head>
 <body>
-
-    <!-- Embed SpotHero Pass -->
-    <iframe id="parkingPass" src="https://spothero.com/parking-pass/96363618?key=f83628ee78d4c13913f3e468a49759058c852d8420d315cfb3f7e4311b0b4748&_branch_match_id=1401690758211250180&utm_source=confirmation_email&utm_campaign=parking_pass&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXLy7IL8lILcrXSywo0MvJzMvWLzcNyshwKys1DUqyrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUAbzUFCT8AAAA%3D">
-    </iframe>
-
-    <script>
-        // Wait for the page to load
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(() => {
-                let iframe = document.getElementById("parkingPass").contentWindow.document;
-                
-                // Remove "Request Cancellation" button
-                let cancelButton = iframe.querySelector('[data-testid="CancelReservation-button-delete"]');
-                if (cancelButton) {
-                    cancelButton.style.display = "none"; // Hide button
-                }
-            }, 2000); // Delay to ensure page loads
-        });
-    </script>
-
+    <h2>Secure Parking Pass</h2>
+    <p>Click below to open your SpotHero pass with the "Request Cancellation" button removed.</p>
+    <button onclick="openPass()">Open Parking Pass</button>
 </body>
 </html>
